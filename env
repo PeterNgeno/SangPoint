@@ -1,0 +1,11 @@
+ADMIN_NAME=Peter K Ngeno
+ADMIN_EMAIL=perontips@gmail.com
+ADMIN_PASSWORD=peron1945
+CONSUMER_KEY=YourConsumerKeyHere
+CONSUMER_SECRET=YourConsumerSecretHere
+FIREBASE_API_KEY=YourFirebaseApiKey
+FIREBASE_AUTH_DOMAIN=YourFirebaseAuthDomain
+FIREBASE_PROJECT_ID=YourFirebaseProjectId
+FIREBASE_STORAGE_BUCKET=YourFirebaseStorageBucket
+FIREBASE_MESSAGING_SENDER_ID=YourFirebaseMessagingSenderId
+FIREBASE_APP_ID=YourFirebaseAppId
