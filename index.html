@@ -1,39 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SangPoint Referral Chain</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SangPoint Referral System</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Welcome to SangPoint Referral Reward Chain!</h1>
-    <p>Share the link with 1000 viewers to earn Ksh 50!</p>
-  </header>
+    <h1>Earn Ksh 50 by Referring 1000 People</h1>
 
-  <main>
-    <section id="share-section">
-      <p>Your unique referral link:</p>
-      <input type="text" id="referral-link" readonly value="https://quiz-perontips.vercel.app/">
-      <button onclick="shareLink()">Share on WhatsApp</button>
-    </section>
+    <!-- Referral Link as a Button -->
+    <a href="https://quiz-perontips.vercel.app/" target="_blank">
+        <button class="referral-button">Earn Real Money by Answering Questions in 30 Seconds</button>
+    </a>
 
-    <section id="status-section">
-      <p>You have referred <span id="referred-count">0</span> viewers.</p>
-      <button id="claim-reward-btn" onclick="claimReward()" disabled>Claim Reward (Ksh 50)</button>
-    </section>
+    <!-- Progress bar section -->
+    <div class="progress-container">
+        <p>Viewers Shared: <span id="viewersCount">0</span>/1000</p>
+        <div class="progress-bar">
+            <div id="progress" class="progress-fill"></div>
+        </div>
+    </div>
 
-    <section id="viewer-section" style="display:none;">
-      <p>Welcome, viewer! You are now part of the referral chain.</p>
-      <button onclick="becomeUser()">Become a User</button>
-    </section>
-  </main>
+    <button onclick="shareOnWhatsApp()">Share via WhatsApp</button>
 
-  <footer>
-    <p>&copy; 2025 SangPoint Referral Chain</p>
-  </footer>
-
-  <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
