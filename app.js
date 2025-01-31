@@ -2,7 +2,7 @@ const referralLink = "https://quiz-perontips.vercel.app/";
 
 // Load previously shared numbers from localStorage
 let sharedViewers = JSON.parse(localStorage.getItem("sharedViewers")) || [];
-updateProgressBar();  // Update on page load
+updateProgressBar(); // Update on page load
 
 // Function to send WhatsApp message
 function shareOnWhatsApp() {
@@ -13,10 +13,10 @@ function shareOnWhatsApp() {
         return;
     }
 
-    // Check if the number has already received the link
+    // Check if the number is already in the shared list
     if (sharedViewers.includes(phoneNumber)) {
-        alert("You have already sent the link to this viewer. Try another person.");
-        return;
+        alert("You have already sent the link to this viewer. Please enter a different number.");
+        return; // Stop if it's a duplicate number
     }
 
     // Add the number to the list of shared viewers
