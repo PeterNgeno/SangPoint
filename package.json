@@ -1,17 +1,20 @@
 {
-  "name": "quiz-win",
+  "name": "sangpoint-referral-chain",
   "version": "1.0.0",
-  "description": "A quiz app with rewards.",
-  "main": "server.js",
-  "dependencies": {
-    "axios": "^1.4.0",
-    "body-parser": "^1.20.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.4",
-    "express": "^4.18.2",
-    "firebase-admin": "^11.10.1"
-  },
+  "description": "Referral system for SangPoint where users can share a link to earn rewards.",
+  "main": "index.html",
   "scripts": {
-    "start": "node server.js"
+    "start": "lite-server",
+    "build": "npm run build",  // If you use a build process, for example using Webpack or Parcel
+    "deploy": "vercel deploy"  // If you're deploying to Vercel
+  },
+  "author": "Peter Ngeno",
+  "license": "MIT",
+  "dependencies": {
+    "lite-server": "^2.5.4"  // A simple web server for local development
+  },
+  "devDependencies": {
+    "webpack": "^5.50.0",  // If you plan on using Webpack for bundling JavaScript
+    "webpack-cli": "^4.8.0"
   }
 }
