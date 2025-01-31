@@ -1,78 +1,45 @@
-let referredCount = 0;
+const referralLink = "https://quiz-perontips.vercel.app/";
 
-function updateReferredCount() {
-  document.getElementById('referred-count').textContent = referredCount;
+// Load previously shared numbers from localStorage
+let sharedViewers = JSON.parse(localStorage.getItem("sharedViewers")) || [];
+updateProgressBar();  // Update on page load
 
-  // Enable reward button if 1000 viewers are referred
-  if (referredCount >= 1000) {
-    document.getElementById('claim-reward-btn').disabled = false;
-  }
+// Function to send WhatsApp message
+function shareOnWhatsApp() {
+    let phoneNumber = prompt("Enter the WhatsApp number of the viewer (e.g., +2547xxxxxxxx):");
+
+    if (!phoneNumber) {
+        alert("No phone number entered!");
+        return;
+    }
+
+    // Check if the number has already received the link
+    if (sharedViewers.includes(phoneNumber)) {
+        alert("You have already sent the link to this viewer. Try another person.");
+        return;
+    }
+
+    // Add the number to the list of shared viewers
+    sharedViewers.push(phoneNumber);
+    localStorage.setItem("sharedViewers", JSON.stringify(sharedViewers));
+
+    // Update progress bar
+    updateProgressBar();
+
+    // Generate WhatsApp message
+    let message = encodeURIComponent(
+        `Hey! Earn Ksh 50 by sharing this link with 1000 viewers: ${referralLink}`
+    );
+
+    // Open WhatsApp with prefilled message
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
 }
 
-function shareLink() {
-  const referralUrl = document.getElementById('referral-link').value;
-  const message = `Join me on SangPoint and earn Ksh 50! Click on this link: ${referralUrl}`;
+// Function to update the progress bar
+function updateProgressBar() {
+    let count = sharedViewers.length;
+    let progressPercent = (count / 1000) * 100;
 
-  // Check if the viewer has already been referred
-  const viewerId = getViewerId();
-  if (hasAlreadyReferred(viewerId)) {
-    alert("You have already referred this viewer. Please share with new viewers.");
-    return;
-  }
-
-  // Open WhatsApp sharing
-  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-  window.open(whatsappUrl, '_blank');
-
-  // Track this referral
-  addReferral(viewerId);
-}
-
-function claimReward() {
-  alert("Congratulations! You have earned Ksh 50!");
-  referredCount = 0;
-  updateReferredCount(); // Reset the count after claiming reward
-}
-
-function becomeUser() {
-  referredCount++;
-  updateReferredCount();
-
-  // Store the user's referral status
-  localStorage.setItem('isUser', true);
-  document.getElementById('viewer-section').style.display = 'none';
-  document.getElementById('share-section').style.display = 'block';
-}
-
-// Generate a unique viewer ID (could be a session-based ID or a unique identifier)
-function getViewerId() {
-  const viewerId = localStorage.getItem('viewerId');
-  if (!viewerId) {
-    const newViewerId = 'viewer-' + new Date().getTime();
-    localStorage.setItem('viewerId', newViewerId);
-    return newViewerId;
-  }
-  return viewerId;
-}
-
-// Check if the user has already referred the current viewer
-function hasAlreadyReferred(viewerId) {
-  const referredViewers = JSON.parse(localStorage.getItem('referredViewers')) || [];
-  return referredViewers.includes(viewerId);
-}
-
-// Add the viewer to the referred list
-function addReferral(viewerId) {
-  const referredViewers = JSON.parse(localStorage.getItem('referredViewers')) || [];
-  referredViewers.push(viewerId);
-  localStorage.setItem('referredViewers', JSON.stringify(referredViewers));
-}
-
-// Check if the visitor is a viewer or a user (using localStorage for demo purposes)
-if (!localStorage.getItem('isUser')) {
-  document.getElementById('viewer-section').style.display = 'block';
-} else {
-  document.getElementById('share-section').style.display = 'block';
-  referredCount = parseInt(localStorage.getItem('referredCount')) || 0;
-  updateReferredCount();
+    document.getElementById("viewersCount").innerText = count;
+    document.getElementById("progress").style.width = progressPercent + "%";
 }
